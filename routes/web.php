@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use \Acaronlex\LaravelCalendar\Calendar;
+use App\Http\Controllers\EventController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,48 +14,12 @@ use \Acaronlex\LaravelCalendar\Calendar;
 |
 */
 
-Route::get('/', function () {
-    $events = [];
+//Route::get('/', function () {
 
-    $events[] = Calendar::event(
-        'Event One', //event title
-        true, //full day event?
-        '2015-02-11T0800', //start time (you can also use Carbon instead of DateTime)
-        '2015-02-12T0800', //end time (you can also use Carbon instead of DateTime)
-        0 //optionally, you can specify an event ID
-    );
+//});
 
-    $events[] = Calendar::event(
-        "Valentine's Day", //event title
-        true, //full day event?
-        new \DateTime('2021-02-14'), //start time (you can also use Carbon instead of DateTime)
-        new \DateTime('2021-02-14'), //end time (you can also use Carbon instead of DateTime)
-        'stringEventId' //optionally, you can specify an event ID
-    );
-
-    $calendar = new Calendar();
-    $calendar->addEvents($events)
-        ->setOptions([
-            'locale' => 'sk',
-            'firstDay' => 0,
-            'displayEventTime' => false,
-            'selectable' => true,
-            'initialView' => 'dayGridMonth',
-            'headerToolbar' => [
-                'end' => 'today prev,next'
-            ],
-            "height" => "100vh",
-            "themeSystem" => 'bootstrap',
-            "theme" => 'darkly'
-        ]);
-    $calendar->setId('1');
-    $calendar->setCallbacks([
-        'select' => 'function(selectionInfo){}',
-        'eventClick' => 'function(event){}'
-    ]);
-
-    return view('welcome', compact('calendar'));
-});
+Route::get('/', [EventController::class, "index"]);
+Route::get('/event/{id}', [EventController::class, "event"]);
 
 Auth::routes();
 
