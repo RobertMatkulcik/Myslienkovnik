@@ -58,9 +58,10 @@ class EventController extends Controller
                         type: 'GET',
                         success: function(response){
                             $('#event-title').text(moment(calEvent.event.start).format('DD.MM')+' '+calEvent.event.title);
-                            $('#start_time').val(moment(calEvent.start).format('YYYY-MM-DD HH:mm:ss'));
-                            $('#finish_time').val(moment(calEvent.end).format('YYYY-MM-DD HH:mm:ss'));
-                            $('#editModal').modal();
+                            $('#event-description').text(response.event[0].description);
+//                            $('#start_time').val(moment(calEvent.start).format('YYYY-MM-DD HH:mm:ss'));
+//                            $('#finish_time').val(moment(calEvent.end).format('YYYY-MM-DD HH:mm:ss'));
+                            $('#viewModal').modal();
                             console.log(response)
                         },
                         error: function(err){
