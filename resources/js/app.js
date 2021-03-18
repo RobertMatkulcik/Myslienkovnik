@@ -9,3 +9,10 @@ import '@fortawesome/fontawesome-free/css/all.css';
 // import 'fullcalendar';
 
 // var moment = require('moment');
+
+
+$( document ).ready(function() {
+    $(".AddNewButton").on("click", function (){
+        $('#addModal').modal();
+    });
+});
