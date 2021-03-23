@@ -17,10 +17,11 @@ use App\Http\Controllers\EventController;
 //Route::get('/', function () {
 
 //});
+Auth::routes();
 
 Route::get('/', [EventController::class, "index"]);
 Route::get('/event/{id}', [EventController::class, "event"]);
+Route::any('event-form', [EventController::class, "store"]);
 
-Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

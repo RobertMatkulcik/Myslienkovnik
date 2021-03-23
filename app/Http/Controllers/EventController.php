@@ -86,6 +86,25 @@ class EventController extends Controller
     public function event(Request $request, $eventId){
         $event = Event::where("id", $eventId)->get();
         return compact('event');
+    }
+
+    public function store(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $request->validate([
+            'title'         => 'required',
+            'start'         => 'required|date',
+            'description'   => 'required',
+        ]);
+
+        Event::create([
+            'title'       => $request->title,
+            'start'       => $request->start,
+            'end'         => $request->start,
+            'description' => $request->description,
+            'user_id' => \Auth::user()->id ?? 0,
+        ]);
+
+        return response()->json([ 'success'=> 'Form is successfully submitted!']);
 
     }
 
